@@ -3,8 +3,14 @@ package com.example.yannis.trainfriendsfinder.parser;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.yannis.trainfriendsfinder.MainActivity;
+import com.example.yannis.trainfriendsfinder.R;
 import com.example.yannis.trainfriendsfinder.Trains;
 import com.example.yannis.trainfriendsfinder.model.Trein;
 
@@ -22,7 +28,8 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
     private ProgressDialog pDialog;
     private Trains activity;
     ArrayList<Trein> countries = null;
-
+    public URL url;
+    public String station;
     public TreinParser(Trains activity) {
         this.activity = activity;
     }
@@ -44,9 +51,11 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-
         try {
-            URL url = new URL("https://api.irail.be/liveboard/?station=Sint-Niklaas&fast=true");
+            if(station == null){
+                station = "antwerpen";
+            }
+            url = new URL("https://api.irail.be/liveboard/?station=" + station + "&fast=true");
 
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -96,6 +105,7 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);

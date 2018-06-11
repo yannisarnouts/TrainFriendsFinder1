@@ -1,6 +1,7 @@
 package com.example.yannis.trainfriendsfinder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,9 +22,10 @@ import com.example.yannis.trainfriendsfinder.parser.TreinParser;
 
 import java.util.ArrayList;
 public class Trains extends android.app.Fragment  {
-
     ListView lv;
-
+    public Button btnZoek;
+    public EditText txtZoek;
+    TreinParser treinParser;
     // TODO: Rename and change types of parameters
     //private String mParam1;
     //private String mParam2;
@@ -55,13 +59,7 @@ public class Trains extends android.app.Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
-
         return inflater.inflate(R.layout.fragment_trains, container, false);
-
-
-
     }
 
     @Override
@@ -69,12 +67,19 @@ public class Trains extends android.app.Fragment  {
 
         super.onViewCreated(view, savedInstanceState);
         lv = getView().findViewById(R.id.list_personen);
-
+        btnZoek = getView().findViewById(R.id.btnZoek);
+        txtZoek = getView().findViewById(R.id.zoek);
+        btnZoek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                treinParser.station.replace(treinParser.station,txtZoek.getText().toString());
+            }
+        });
         new TreinParser(this).execute();
     }
-
-
-
+    public static String getZoek(String zoek){
+        return zoek;
+    }
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void UpdateUI(ArrayList<Trein> countries){
         try{
