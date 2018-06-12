@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "755249715672",
+    "firebase_url": "https://trainfriends-4b3b9.firebaseio.com",
+    "project_id": "trainfriends-4b3b9",
+    "storage_bucket": "trainfriends-4b3b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755249715672:android:0a901c6d062421fa",
+        "android_client_info": {
+          "package_name": "com.example.yannis.trainfriendsfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755249715672-amf4ve41v87456j47uabl02op7l77l0a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yannis.trainfriendsfinder",
+            "certificate_hash": "aeb1cf7418a7572eee6bfdf9fedb1d42b86361bf"
+          }
+        },
+        {
+          "client_id": "755249715672-jl23fv45cmpkp5vip0e7u3c6p47ctanr.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "755249715672-jl23fv45cmpkp5vip0e7u3c6p47ctanr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIaD9XBWSNeR7gbtz6yBlIBMZa3fT3kh4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755249715672-jl23fv45cmpkp5vip0e7u3c6p47ctanr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
