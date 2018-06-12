@@ -3,6 +3,7 @@ package com.example.yannis.trainfriendsfinder;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,7 +26,7 @@ public class Trains extends android.app.Fragment  {
     ListView lv;
     public Button btnZoek;
     public EditText txtZoek;
-    TreinParser treinParser;
+    TreinParser treinParser = new TreinParser(this);
     // TODO: Rename and change types of parameters
     //private String mParam1;
     //private String mParam2;
@@ -70,13 +71,26 @@ public class Trains extends android.app.Fragment  {
         btnZoek = getView().findViewById(R.id.btnZoek);
         txtZoek = getView().findViewById(R.id.zoek);
         btnZoek.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                treinParser.station.replace(treinParser.station,txtZoek.getText().toString());
+                //getUrl();
+                treinParser.changeUrl("ESSEN");
+                //treinParser.changeUrl(txtZoek.getText().toString());
             }
         });
         new TreinParser(this).execute();
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void getUrl() {
+        treinParser.onPreExecute();
+        treinParser.station = txtZoek.getText().toString();
+        treinParser.doInBackground();
+        //treinParser.onPostExecute();
+        UpdateUI(treinParser.countries);
+    }
+
     public static String getZoek(String zoek){
         return zoek;
     }
@@ -86,7 +100,6 @@ public class Trains extends android.app.Fragment  {
             MainActivity activity = new MainActivity();
             TreinAdapter treinAdapter = new TreinAdapter(getContext(), countries);
             lv.setAdapter(treinAdapter);
-
         } catch (Exception e){
             //Snackbar.make(getView(), "No internet connection...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();

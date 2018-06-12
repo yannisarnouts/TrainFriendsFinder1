@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class TreinParser extends AsyncTask<Void, Void, Void> {
     private ProgressDialog pDialog;
     private Trains activity;
-    ArrayList<Trein> countries = null;
+    public ArrayList<Trein> countries = null;
     public URL url;
     public String station;
     public TreinParser(Trains activity) {
@@ -36,7 +36,7 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    protected void onPreExecute() {
+    public void onPreExecute() {
         super.onPreExecute();
         pDialog = new ProgressDialog(activity.getContext());
         pDialog.setTitle("Data");
@@ -50,7 +50,7 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... params) {
+    public Void doInBackground(Void... params) {
         try {
             if(station == null){
                 station = "antwerpen";
@@ -107,9 +107,17 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    protected void onPostExecute(Void aVoid) {
+    public void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         pDialog.dismiss();
         activity.UpdateUI(countries);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void changeUrl(String url){
+        onPreExecute();
+        station = url;
+        doInBackground();
+        activity.UpdateUI(countries);
+        //return station;
     }
 }
