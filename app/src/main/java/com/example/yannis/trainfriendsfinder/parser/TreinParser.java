@@ -95,10 +95,6 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
                 }
                 eventType = parser.next();
             }
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,10 +110,10 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void changeUrl(String url){
+        Void aVoid = null;
         onPreExecute();
         station = url;
         doInBackground();
-        activity.UpdateUI(countries);
-        //return station;
+        onPostExecute(aVoid);
     }
 }

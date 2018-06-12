@@ -26,7 +26,7 @@ public class Trains extends android.app.Fragment  {
     ListView lv;
     public Button btnZoek;
     public EditText txtZoek;
-    TreinParser treinParser = new TreinParser(this);
+    TreinParser treinParser;
     // TODO: Rename and change types of parameters
     //private String mParam1;
     //private String mParam2;
@@ -74,9 +74,9 @@ public class Trains extends android.app.Fragment  {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                //getUrl();
-                treinParser.changeUrl("ESSEN");
-                //treinParser.changeUrl(txtZoek.getText().toString());
+                treinParser = new TreinParser(Trains.this);
+                treinParser.station = txtZoek.getText().toString();
+                treinParser.execute();
             }
         });
         new TreinParser(this).execute();
@@ -87,21 +87,15 @@ public class Trains extends android.app.Fragment  {
         treinParser.onPreExecute();
         treinParser.station = txtZoek.getText().toString();
         treinParser.doInBackground();
-        //treinParser.onPostExecute();
         UpdateUI(treinParser.countries);
     }
 
-    public static String getZoek(String zoek){
-        return zoek;
-    }
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void UpdateUI(ArrayList<Trein> countries){
         try{
-            MainActivity activity = new MainActivity();
             TreinAdapter treinAdapter = new TreinAdapter(getContext(), countries);
             lv.setAdapter(treinAdapter);
         } catch (Exception e){
-            //Snackbar.make(getView(), "No internet connection...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();
         }
 
