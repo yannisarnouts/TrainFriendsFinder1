@@ -1,5 +1,6 @@
 package com.example.yannis.trainfriendsfinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         } else if (id == R.id.nav_send) {
 
+        } else if(id == R.id.login){
+            fragment = new LoginFragment();
         }
         if(fragmentManager != null){
             fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
