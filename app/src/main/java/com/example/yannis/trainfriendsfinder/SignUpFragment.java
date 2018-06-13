@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 
 /**
@@ -77,7 +78,11 @@ public class SignUpFragment extends android.app.Fragment {
                 if(task.isSuccessful()){
                     Toast.makeText(getActivity(), "Gebruiker succesvol geregistreerd", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(getActivity(), "Registreren mislukt", Toast.LENGTH_LONG).show();
+                    if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                        Toast.makeText(getActivity(), "Dit email adres is al in gebruik", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getActivity(), "Registreren mislukt", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

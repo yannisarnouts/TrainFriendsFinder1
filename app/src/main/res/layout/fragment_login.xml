@@ -9,6 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <EditText
+            android:id="@+id/loginemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/colorAccent" />
+
+        <EditText
+            android:id="@+id/loginpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/colorAccent" />
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Log in"
+            android:id="@+id/btnlogin"/>
         <TextView
             android:id="@+id/status_textview"
             android:layout_width="wrap_content"

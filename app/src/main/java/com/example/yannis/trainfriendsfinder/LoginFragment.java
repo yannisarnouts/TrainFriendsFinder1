@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,11 @@ public class LoginFragment extends android.app.Fragment {
     public static final String TAG = "SignInFragment";
     public static final int RC_SIGN_IN = 9001;
 
+    EditText txtlogin;
+    EditText txtpassw;
+    FirebaseAuth mAuth;
+    Button btnLogin;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -61,28 +67,43 @@ public class LoginFragment extends android.app.Fragment {
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity()).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+        mAuth = FirebaseAuth.getInstance();
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        statusTextView = getView().findViewById(R.id.status_textview);
-        signInButton = getView().findViewById(R.id.sign_in_button);
-        menuNaam = getView().findViewById(R.id.menuNaam);
+        initialiseView();
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn();
             }
         });
-        signOutButton = getView().findViewById(R.id.signOutButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signOut();
             }
         });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userLogin();
+            }
+        });
+
+    }
+
+    private void initialiseView() {
+        statusTextView = getView().findViewById(R.id.status_textview);
+        signInButton = getView().findViewById(R.id.sign_in_button);
+        menuNaam = getView().findViewById(R.id.menuNaam);
+        signOutButton = getView().findViewById(R.id.signOutButton);
+        btnLogin = getView().findViewById(R.id.btnlogin);
+        txtlogin = getView().findViewById(R.id.loginemail);
+        txtpassw = getView().findViewById(R.id.loginpassword);
     }
 
     private void signIn() {
@@ -112,6 +133,21 @@ public class LoginFragment extends android.app.Fragment {
             @Override
             public void onResult(@NonNull Status status) {
                 statusTextView.setText("Signed out");
+            }
+        });
+    }
+    private void userLogin(){
+        String email = txtlogin.getText().toString();
+        String pass = txtpassw.getText().toString();
+
+        mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getActivity(), "U bent ingelogd!", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
