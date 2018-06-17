@@ -13,18 +13,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.yannis.trainfriendsfinder.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SignUpFragment extends android.app.Fragment {
-    EditText txtUsername, txtPassword;
+    EditText txtUsername, txtPassword, txtNaam, txtTelefoon;
     Button btnSignUp;
     private FirebaseAuth mAuth;
     public SignUpFragment() {
@@ -45,6 +48,8 @@ public class SignUpFragment extends android.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
         txtUsername = getView().findViewById(R.id.editTextEmail);
         txtPassword = getView().findViewById(R.id.editTextPassword);
+        txtNaam = getView().findViewById(R.id.editTextNaam);
+        txtTelefoon = getView().findViewById(R.id.editTextTelefoon);
         btnSignUp = getView().findViewById(R.id.buttonSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,9 +59,19 @@ public class SignUpFragment extends android.app.Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null){
+            Toast.makeText(getActivity(), "U bent al ingelogd", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void registeruser(){
-        String username = txtUsername.getText().toString();
+        final String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
+        final String naam = txtNaam.getText().toString();
+        final String telnr = txtTelefoon.getText().toString();
         if(username.isEmpty()){
             Toast.makeText(getActivity(), "Gelieve email in te vullen", Toast.LENGTH_LONG).show();
             txtUsername.requestFocus();
@@ -76,7 +91,19 @@ public class SignUpFragment extends android.app.Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getActivity(), "Gebruiker succesvol geregistreerd", Toast.LENGTH_LONG).show();
+                    User user = new User(naam, username, telnr);
+                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                DataSnapshot dataSnapshot;
+                                Toast.makeText(getActivity(), "Gebruiker succesvol geregistreerd" , Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getActivity(), "Registreren mislukt", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 }else{
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
                         Toast.makeText(getActivity(), "Dit email adres is al in gebruik", Toast.LENGTH_LONG).show();
