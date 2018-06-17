@@ -16,8 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+    NavigationView navigationView;
+    View headerView;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    TextView menuNaam;
+    ImageView imgProfiel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +57,15 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        headerView = navigationView.getHeaderView(0);
         //NU FRAGMENT
-
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        menuNaam = headerView.findViewById(R.id.menuNaam);
+        imgProfiel = headerView.findViewById(R.id.imageView);
+        updateNav();
     }
 
     @Override
@@ -106,8 +121,16 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         } else if(id == R.id.login){
             fragment = new LoginFragment();
+
         } else if(id == R.id.signUp){
             fragment = new SignUpFragment();
+        }
+        else if(id == R.id.profiel){
+            fragment = new ProfileFragment();
+        }else if(id == R.id.loguit){
+            FirebaseAuth.getInstance().signOut();
+            //finish();
+            fragment = new LoginFragment();
         }
         if(fragmentManager != null){
             fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
@@ -115,5 +138,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void updateNav(){
+        if(user != null){
+            menuNaam.setText(user.getEmail());
+            imgProfiel.setImageURI(user.getPhotoUrl());
+        }
     }
 }

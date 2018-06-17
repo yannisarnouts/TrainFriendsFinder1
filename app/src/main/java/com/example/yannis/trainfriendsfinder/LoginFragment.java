@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -43,7 +44,6 @@ public class LoginFragment extends android.app.Fragment {
     Button signOutButton;
     TextView statusTextView;
     GoogleApiClient mGoogleApiClient;
-    TextView menuNaam;
     public static final String TAG = "SignInFragment";
     public static final int RC_SIGN_IN = 9001;
 
@@ -51,6 +51,7 @@ public class LoginFragment extends android.app.Fragment {
     EditText txtpassw;
     FirebaseAuth mAuth;
     Button btnLogin;
+    MainActivity mainActivity = new MainActivity();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -93,22 +94,22 @@ public class LoginFragment extends android.app.Fragment {
                 userLogin();
             }
         });
-
     }
 
     private void initialiseView() {
         statusTextView = getView().findViewById(R.id.status_textview);
         signInButton = getView().findViewById(R.id.sign_in_button);
-        menuNaam = getView().findViewById(R.id.menuNaam);
         signOutButton = getView().findViewById(R.id.signOutButton);
         btnLogin = getView().findViewById(R.id.btnlogin);
         txtlogin = getView().findViewById(R.id.loginemail);
         txtpassw = getView().findViewById(R.id.loginpassword);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        mainActivity.updateNav();
     }
 
     @Override
@@ -137,7 +138,7 @@ public class LoginFragment extends android.app.Fragment {
         });
     }
     private void userLogin(){
-        String email = txtlogin.getText().toString();
+        final String email = txtlogin.getText().toString();
         String pass = txtpassw.getText().toString();
 
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

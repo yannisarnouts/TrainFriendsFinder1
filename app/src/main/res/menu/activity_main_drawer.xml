@@ -7,11 +7,19 @@
             <item
                 android:id="@+id/login"
                 android:icon="@drawable/common_google_signin_btn_icon_light"
-                android:title="SignIn"/>
+                android:title="Log in"/>
             <item
                 android:id="@+id/signUp"
                 android:icon="@drawable/common_google_signin_btn_icon_light"
-                android:title="Sign Up"/>
+                android:title="Registreer"/>
+            <item
+                android:id="@+id/profiel"
+                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:title="Mijn profiel"/>
+            <item
+                android:id="@+id/loguit"
+                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:title="Log uit"/>
         </menu>
     </item>
     <group android:checkableBehavior="single">
