@@ -62,12 +62,12 @@
                 android:textColorHint="@color/colorAccent" />
 
             <EditText
-                android:id="@+id/editTextTelefoon"
+                android:id="@+id/editTextGroep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="telefoon"
-                android:inputType="textEmailAddress"
+                android:hint="groep"
+                android:inputType="text"
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 

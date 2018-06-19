@@ -5,14 +5,15 @@ package com.example.yannis.trainfriendsfinder.model;
  */
 
 public class User {
-    public String naam, email, telefoon;
+    public String naam, email, groep;
 
     public User(){
 
     }
-    public User(String naam, String email, String telefoon) {
+
+    public User(String naam, String email, String groep) {
         this.naam = naam;
         this.email = email;
-        this.telefoon = telefoon;
+        this.groep = groep;
     }
 }
