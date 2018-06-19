@@ -97,7 +97,6 @@ public class SignUpFragment extends android.app.Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                DataSnapshot dataSnapshot;
                                 Toast.makeText(getActivity(), "Gebruiker succesvol geregistreerd" , Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(getActivity(), "Registreren mislukt", Toast.LENGTH_LONG).show();

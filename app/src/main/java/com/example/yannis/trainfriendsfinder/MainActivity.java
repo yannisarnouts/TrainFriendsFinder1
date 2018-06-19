@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         android.app.FragmentManager fragmentManager = getFragmentManager();
         if (id == R.id.trainsButton) {
             fragment = new Trains();
-        } else if (id == R.id.nav_gallery) {
-
+        } else if (id == R.id.nav_groep) {
+            fragment = new GroepFragment();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

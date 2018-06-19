@@ -28,9 +28,8 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Trains" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="NMBS" />
+            android:id="@+id/nav_groep"
+            android:title="Groep" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
