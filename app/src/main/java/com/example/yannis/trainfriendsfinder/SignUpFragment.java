@@ -109,7 +109,7 @@ public class SignUpFragment extends android.app.Fragment {
                             }
                         }
                     });
-                    FirebaseDatabase.getInstance().getReference("Groepen").setValue(groep);
+                    FirebaseDatabase.getInstance().getReference("Groepen").child(groep).setValue(groep);
                 }else{
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
                         Toast.makeText(getActivity(), "Dit email adres is al in gebruik", Toast.LENGTH_LONG).show();

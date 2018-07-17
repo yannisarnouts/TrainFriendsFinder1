@@ -37,6 +37,13 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        android.app.Fragment fragment = null;
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragment = new Trains();
+        if(fragmentManager != null){
+            fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+        }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

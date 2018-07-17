@@ -1,6 +1,7 @@
 package com.example.yannis.trainfriendsfinder.adapter;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ public class TreinAdapter extends ArrayAdapter<Trein> {
     @Override
     public View getView(int position, View convertView,
                         ViewGroup parent) {
-
         View view = convertView;
         Trein trein = getItem(position);
         if (convertView == null) {
@@ -42,8 +42,8 @@ public class TreinAdapter extends ArrayAdapter<Trein> {
         TextView tijd = view.findViewById(R.id.tv_tijd);
         tijd.setText(trein.getTime());
 
-        ImageView ig = view.findViewById(R.id.iv_afbeelding);
-        ig.setImageResource(R.drawable.trein);
+    //  ImageView ig = view.findViewById(R.id.iv_afbeelding);
+      //  ig.setImageResource(R.drawable.trein);
 
 
         return view;
