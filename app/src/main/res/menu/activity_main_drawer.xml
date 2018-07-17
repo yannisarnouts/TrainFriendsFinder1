@@ -28,6 +28,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Trains" />
         <item
+            android:title="Maak groep"
+            android:id="@+id/creategroup"/>
+        <item
             android:id="@+id/nav_groep"
             android:title="Groep" />
         <item

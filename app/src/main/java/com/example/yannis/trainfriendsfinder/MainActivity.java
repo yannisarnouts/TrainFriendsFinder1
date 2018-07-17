@@ -139,6 +139,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             //finish();
             fragment = new LoginFragment();
         }
+        else if(id == R.id.creategroup){
+            fragment = new CreateGroepFragment();
+        }
         if(fragmentManager != null){
             fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
         }

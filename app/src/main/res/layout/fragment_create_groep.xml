@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yannis.trainfriendsfinder.CreateGroepFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/groepnaam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Groepsnaam"/>
+        <EditText
+            android:id="@+id/groepcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="code"/>
+
+        <Button
+            android:id="@+id/groepsubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+    </LinearLayout>
+
+</FrameLayout>

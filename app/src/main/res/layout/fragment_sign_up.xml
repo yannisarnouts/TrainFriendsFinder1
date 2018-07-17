@@ -7,19 +7,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
-        <ImageView
-            android:layout_width="85dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/trein" />
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/colorPrimary">
 
@@ -58,16 +45,6 @@
                 android:fontFamily="sans-serif"
                 android:hint="password"
                 android:inputType="textPassword"
-                android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
-
-            <EditText
-                android:id="@+id/editTextGroep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="groep"
-                android:inputType="text"
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 
