@@ -61,9 +61,9 @@ public class GroepFragment extends android.app.Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot s : dataSnapshot.getChildren()){
-                    String value = s.child("groep").getValue(String.class);
+                    String value = s.child("groepId").getValue(String.class);
                     String naam = s.child("naam").getValue(String.class);
-                    if(value.equals(dataSnapshot.child(uid).child("groep").getValue(String.class))){
+                    if(value.equals(dataSnapshot.child(uid).child("groepId").getValue(String.class))){
                         usernames.add(naam);
                         arrayAdapter.notifyDataSetChanged();
                     }
