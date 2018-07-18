@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,23 +58,27 @@ public class GroepFragment extends android.app.Fragment {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, usernames);
         lvGroep.setAdapter(arrayAdapter);
 
-        dbref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot s : dataSnapshot.getChildren()){
-                    String value = s.child("groepId").getValue(String.class);
-                    String naam = s.child("naam").getValue(String.class);
-                    if(value.equals(dataSnapshot.child(uid).child("groepId").getValue(String.class))){
+    dbref.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot s : dataSnapshot.getChildren()) {
+                String value = s.child("groepId").getValue(String.class);
+                String naam = s.child("naam").getValue(String.class);
+                try{
+                    if (value.equals(dataSnapshot.child(uid).child("groepId").getValue(String.class))) {
                         usernames.add(naam);
                         arrayAdapter.notifyDataSetChanged();
                     }
+                }catch (NullPointerException ne){
+                    Toast.makeText(getContext(), "Maak een groep of voeg jezelf aan een groep toe!", Toast.LENGTH_LONG).show();
                 }
             }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+        }
+    });
     }
 }

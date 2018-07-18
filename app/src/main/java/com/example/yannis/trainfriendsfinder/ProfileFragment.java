@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -19,7 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class ProfileFragment extends android.app.Fragment {
     FirebaseAuth mAuth;
     FirebaseUser user;
-    TextView txtNaam;
+    TextView txtNaam, txtmail;
+    DatabaseReference dbref;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -39,6 +42,8 @@ public class ProfileFragment extends android.app.Fragment {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         txtNaam = getView().findViewById(R.id.txtNaam);
+
+        dbref = FirebaseDatabase.getInstance().getReference().child("Users");
         txtNaam.setText(user.getEmail());
     }
 }

@@ -98,6 +98,5 @@ public class Trains extends android.app.Fragment  {
         } catch (Exception e){
             Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();
         }
-
     }
 }

@@ -2,6 +2,7 @@ package com.example.yannis.trainfriendsfinder;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -16,16 +17,21 @@ import com.example.yannis.trainfriendsfinder.model.Groep;
 import com.example.yannis.trainfriendsfinder.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CreateGroepFragment extends android.app.Fragment {
-EditText txtgroepsnaam, txtgroepscode;
-Button btnSubmit;
+EditText txtgroepsnaam, txtgroepscode, txtgroepslogin, txtgroepslogincode;
+Button btnSubmit, btnVolg;
     private DatabaseReference dbref;
     FirebaseUser fbuser;
     FirebaseAuth mAuth;
@@ -49,7 +55,10 @@ Button btnSubmit;
         super.onViewCreated(view, savedInstanceState);
         txtgroepsnaam = getView().findViewById(R.id.groepnaam);
         txtgroepscode = getView().findViewById(R.id.groepcode);
+        txtgroepslogin = getView().findViewById(R.id.groeploginnaam);
+        txtgroepslogincode = getView().findViewById(R.id.groeplogincode);
         btnSubmit = getView().findViewById(R.id.groepsubmit);
+        btnVolg = getView().findViewById(R.id.groeplogin);
         dbref = FirebaseDatabase.getInstance().getReference("Groepen");
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +66,43 @@ Button btnSubmit;
                 createGroep();
             }
         });
+        btnVolg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                joinGroup();
+            }
+        });
     }
+
+    private void joinGroup() {
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s : dataSnapshot.getChildren()){
+                    String naam = s.child("naam").getValue(String.class);
+                    String code = s.child("code").getValue(String.class);
+                    if(naam.equals(txtgroepslogin.getText().toString())){
+                        updateUser(s.getKey());
+                        Toast.makeText(getContext(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+//        String groepsnaam = txtgroepslogin.getText().toString();
+//        if(!TextUtils.isEmpty(groepsnaam)){
+//            String groepId = dbref.push().getKey();
+//            updateUser(groepId);
+//            Toast.makeText(getContext(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
+//        }else{
+//            Toast.makeText(getContext(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();
+//        }
+    }
+
     private void createGroep(){
         String groepsnaam = txtgroepsnaam.getText().toString();
         String groepscode = txtgroepscode.getText().toString();
@@ -68,7 +113,7 @@ Button btnSubmit;
             updateUser(groepId);
             Toast.makeText(getContext(), "Groep aangemaakt", Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(getContext(), "Kan groep niet maken", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();
         }
     }
 

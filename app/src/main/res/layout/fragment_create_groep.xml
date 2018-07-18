@@ -4,9 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.yannis.trainfriendsfinder.CreateGroepFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maak een groep:"
+        android:textSize="24sp" />
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
         <EditText
             android:id="@+id/groepnaam"
             android:layout_width="wrap_content"
@@ -22,7 +28,33 @@
             android:id="@+id/groepsubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit" />
+            android:text="Maak" />
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meld aan bij een groep:"
+        android:layout_marginTop="75dp"
+        android:textSize="24sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+        <EditText
+            android:id="@+id/groeploginnaam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Groepsnaam"/>
+        <EditText
+            android:id="@+id/groeplogincode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="code"/>
 
+        <Button
+            android:id="@+id/groeplogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volg" />
+    </LinearLayout>
 </FrameLayout>

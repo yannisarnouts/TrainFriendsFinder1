@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +35,7 @@ public class SignUpFragment extends android.app.Fragment {
     EditText txtUsername, txtPassword, txtNaam;
     Button btnSignUp;
     private FirebaseAuth mAuth;
+    FirebaseUser firebaseUser;
     //private DatabaseReference dbref;
 
     public SignUpFragment() {
@@ -104,6 +107,7 @@ public class SignUpFragment extends android.app.Fragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(getActivity(), "Gebruiker succesvol geregistreerd" , Toast.LENGTH_LONG).show();
+                                addDisplayName();
                             }else{
                                 Toast.makeText(getActivity(), "Registreren mislukt", Toast.LENGTH_LONG).show();
                             }
@@ -119,5 +123,13 @@ public class SignUpFragment extends android.app.Fragment {
                 }
             }
         });
+    }
+
+    private void addDisplayName() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(txtNaam.getText().toString()).build();
+        }
     }
 }
