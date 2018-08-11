@@ -6,27 +6,45 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yannis.trainfriendsfinder.adapter.TreinAdapter;
 import com.example.yannis.trainfriendsfinder.model.Trein;
 import com.example.yannis.trainfriendsfinder.parser.TreinParser;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 public class Trains extends android.app.Fragment  {
     ListView lv;
     public Button btnZoek;
     public EditText txtZoek;
+    TextView txttrein;
     TreinParser treinParser;
+    DatabaseReference databaseReference;
+    DatabaseReference dbrefUser;
+    String userId, groepId, username;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
     // TODO: Rename and change types of parameters
     //private String mParam1;
     //private String mParam2;
@@ -70,6 +88,13 @@ public class Trains extends android.app.Fragment  {
         lv = getView().findViewById(R.id.list_personen);
         btnZoek = getView().findViewById(R.id.btnZoek);
         txtZoek = getView().findViewById(R.id.zoek);
+        txttrein = getView().findViewById(R.id.tv_naam);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        userId = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Notifications");
+        dbrefUser = FirebaseDatabase.getInstance().getReference().child("Users");
+
         btnZoek.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -79,8 +104,26 @@ public class Trains extends android.app.Fragment  {
                 treinParser.execute();
             }
         });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String naam = adapterView.getItemAtPosition(i).toString();
+                String[] trein = naam.split(",");
+                String bestemming = trein[0].substring(16);
+                String time = trein[3].substring(6);
+                Toast.makeText(getContext(), "Ingecheckt in trein naar: "+bestemming + " om " + time, Toast.LENGTH_LONG).show();
+                SendNotification(bestemming, time);
+            }
+        });
         new TreinParser(this).execute();
     }
+
+//    private void checkIn() {
+//        //TODO
+//        Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();
+//
+//        FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void getUrl() {
@@ -98,5 +141,30 @@ public class Trains extends android.app.Fragment  {
         } catch (Exception e){
             Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void SendNotification(String trein, String tijd){
+        dbrefUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                groepId= dataSnapshot.child(userId).child("groepId").getValue(String.class);
+                username = dataSnapshot.child(userId).child("naam").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        DatabaseReference notification = databaseReference.push();
+        notification.child("message").setValue(username + ":"+trein+" "+tijd);
+        notification.child("to").setValue(groepId);
+        notification.child("from").setValue(userId).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getContext(),"Notification Sent",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -27,12 +27,15 @@
         app:layout_constraintStart_toEndOf="@+id/tv_naam"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
-        android:text="CheckIn"
+        android:layout_marginEnd="51dp"
+        android:layout_marginTop="16dp"
+        android:text="Check In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

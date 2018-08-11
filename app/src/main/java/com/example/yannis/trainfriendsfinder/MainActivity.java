@@ -118,15 +118,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             fragment = new Trains();
         } else if (id == R.id.nav_groep) {
             fragment = new GroepFragment();
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } else if(id == R.id.login){
+        } else if (id == R.id.meldingen) {
+            fragment = new MeldingenFragment();
+        }  else if(id == R.id.login){
             fragment = new LoginFragment();
 
         } else if(id == R.id.signUp){

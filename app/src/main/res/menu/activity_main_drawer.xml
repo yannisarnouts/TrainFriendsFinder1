@@ -25,7 +25,6 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/trainsButton"
-            android:icon="@drawable/ic_menu_camera"
             android:title="Trains" />
         <item
             android:title="Maak groep"
@@ -34,9 +33,8 @@
             android:id="@+id/nav_groep"
             android:title="Groep" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Friends" />
+            android:id="@+id/meldingen"
+            android:title="Meldingen" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
