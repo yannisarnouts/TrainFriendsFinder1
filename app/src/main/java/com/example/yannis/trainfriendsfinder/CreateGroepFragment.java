@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
 
@@ -83,6 +85,7 @@ Button btnSubmit, btnVolg;
                     String code = s.child("code").getValue(String.class);
                     if(naam.equals(txtgroepslogin.getText().toString())){
                         updateUser(s.getKey());
+                        FirebaseMessaging.getInstance().subscribeToTopic(s.getKey());
                         Toast.makeText(getContext(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -111,6 +114,7 @@ Button btnSubmit, btnVolg;
             Groep groep = new Groep(groepId, groepsnaam, groepscode);
             dbref.child(groepId).setValue(groep);
             updateUser(groepId);
+            FirebaseMessaging.getInstance().subscribeToTopic(groepId);
             Toast.makeText(getContext(), "Groep aangemaakt", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getContext(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();

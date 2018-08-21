@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -67,10 +68,13 @@ public class ProfileFragment extends android.app.Fragment {
                 for (DataSnapshot s : dataSnapshot.getChildren()){
                     String trein = s.child("message").getValue(String.class);
                     String from = s.child("from").getValue(String.class);
-
-                    if(from.equals(uid)){
-                        treinen.add(trein.replace('}', ' '));
-                        arrayAdapter.notifyDataSetChanged();
+                    try {
+                        if (from.equals(uid)) {
+                            treinen.add(trein.replace('}', ' '));
+                            arrayAdapter.notifyDataSetChanged();
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getContext(),"ERROR",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
