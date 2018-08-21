@@ -38,7 +38,8 @@ public class TreinParser extends AsyncTask<Void, Void, Void> {
     @Override
     public void onPreExecute() {
         super.onPreExecute();
-        pDialog = new ProgressDialog(activity.getContext());
+        pDialog = new ProgressDialog(activity.getActivity());
+        //activity.getContext()
         pDialog.setTitle("Data");
         pDialog.setMessage("Loading...");
         pDialog.show();

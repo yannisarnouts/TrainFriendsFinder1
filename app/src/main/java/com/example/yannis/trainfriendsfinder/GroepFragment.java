@@ -57,7 +57,8 @@ public class GroepFragment extends android.app.Fragment {
         user = mAuth.getCurrentUser();
         uid = user.getUid();
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, usernames);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, usernames);
+        //getContext
         lvGroep.setAdapter(arrayAdapter);
 
     dbref.addValueEventListener(new ValueEventListener() {
@@ -72,7 +73,8 @@ public class GroepFragment extends android.app.Fragment {
                         arrayAdapter.notifyDataSetChanged();
                     }
                 }catch (NullPointerException ne){
-                    Toast.makeText(getContext(), "Maak een groep of voeg jezelf aan een groep toe!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Maak een groep of voeg jezelf aan een groep toe!", Toast.LENGTH_LONG).show();
+                    //getcontext
                 }
             }
         }

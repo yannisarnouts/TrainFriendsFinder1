@@ -118,10 +118,12 @@ public class Trains extends android.app.Fragment  {
                     String bestemming = trein[0].substring(16);
                     String time = trein[3].substring(6);
                     try {
-                    Toast.makeText(getContext(), "Ingecheckt in trein naar: " + bestemming + " om " + time, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Ingecheckt in trein naar: " + bestemming + " om " + time, Toast.LENGTH_LONG).show();
+                    //getcontext
                     SendNotification(bestemming, time);
                 } catch (Exception e){
-                    Toast.makeText(getContext(), "Om in te kunnen checken moet u aangemeld zijn!", Toast.LENGTH_LONG).show();
+                        //getcontext
+                        Toast.makeText(getActivity(), "Om in te kunnen checken moet u aangemeld zijn!", Toast.LENGTH_LONG).show();
                 }
                 }
             });
@@ -147,7 +149,8 @@ public class Trains extends android.app.Fragment  {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void UpdateUI(ArrayList<Trein> countries){
         try{
-            TreinAdapter treinAdapter = new TreinAdapter(getContext(), countries);
+            TreinAdapter treinAdapter = new TreinAdapter(getActivity(), countries);
+            //getContext()
             lv.setAdapter(treinAdapter);
         } catch (Exception e){
             Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();
@@ -178,12 +181,14 @@ public class Trains extends android.app.Fragment  {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(),"Notificatie verzonden",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Notificatie verzonden",Toast.LENGTH_SHORT).show();
+                //getcontext
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),"Notificatie niet verzonden :(",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Notificatie niet verzonden :(",Toast.LENGTH_SHORT).show();
+                //getcontext
             }
         });
     }

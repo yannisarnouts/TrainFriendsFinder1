@@ -59,7 +59,8 @@ public class ProfileFragment extends android.app.Fragment {
         dbref = FirebaseDatabase.getInstance().getReference().child("Notifications");
         txtNaam.setText(user.getEmail());
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, treinen);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, treinen);
+        //getContext()
         lvMijnRitten.setAdapter(arrayAdapter);
 
         dbref.addValueEventListener(new ValueEventListener() {

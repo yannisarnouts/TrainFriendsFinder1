@@ -86,7 +86,8 @@ Button btnSubmit, btnVolg;
                     if(naam.equals(txtgroepslogin.getText().toString())){
                         updateUser(s.getKey());
                         FirebaseMessaging.getInstance().subscribeToTopic(s.getKey());
-                        Toast.makeText(getContext(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
+                        //getContext()
                     }
                 }
             }
