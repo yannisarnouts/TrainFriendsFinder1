@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.yannis.trainfriendsfinder.adapter.MeldingAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,9 +58,9 @@ public class MeldingenFragment extends android.app.Fragment {
         user = mAuth.getCurrentUser();
         uid = user.getUid();
         dbrefUser = FirebaseDatabase.getInstance().getReference().child("Users");
-
+        final MeldingAdapter meldingAdapter = new MeldingAdapter(getActivity(), meldingen);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, meldingen);
-        lvMeldingen.setAdapter(arrayAdapter);
+        lvMeldingen.setAdapter(meldingAdapter);
 
         dbrefUser.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,7 +83,7 @@ public class MeldingenFragment extends android.app.Fragment {
                     try{
                         if (value.equals(groepId)) {
                             meldingen.add(naam);
-                            arrayAdapter.notifyDataSetChanged();
+                            meldingAdapter.notifyDataSetChanged();
                         }
                     }catch (NullPointerException ne){
                         Toast.makeText(getContext(), "Maak een groep of voeg jezelf aan een groep toe!", Toast.LENGTH_LONG).show();

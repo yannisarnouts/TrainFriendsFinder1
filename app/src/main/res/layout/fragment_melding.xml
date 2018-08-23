@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/naamMelding"
+        app:layout_constraintEnd_toStartOf="@+id/naamMelding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/naamMelding"
+        app:srcCompat="@drawable/notificationicon" />
+
+    <TextView
+        android:id="@+id/naamMelding"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginTop="8dp"
+        android:text="Naam"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/bestemmingMelding"
+        app:layout_constraintEnd_toStartOf="@+id/bestemmingMelding"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/bestemmingMelding" />
+
+    <TextView
+        android:id="@+id/bestemmingMelding"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginTop="8dp"
+        android:text="Bestemming"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/naamMelding"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
