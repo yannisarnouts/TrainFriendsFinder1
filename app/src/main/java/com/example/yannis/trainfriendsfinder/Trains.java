@@ -177,19 +177,20 @@ public class Trains extends android.app.Fragment  {
         DatabaseReference notification = databaseReference.push();
         notification.child("message").setValue(username + ":"+trein+" "+tijd);
         notification.child("to").setValue(groepId);
-        notification.child("from").setValue(userId).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onSuccess(Void aVoid) {
+        notification.child("from").setValue(userId);
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onSuccess(Void aVoid) {
                 Toast.makeText(getActivity(),"Notificatie verzonden",Toast.LENGTH_SHORT).show();
                 //getcontext
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(),"Notificatie niet verzonden :(",Toast.LENGTH_SHORT).show();
-                //getcontext
-            }
-        });
+            //}
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getActivity(),"Notificatie niet verzonden :(",Toast.LENGTH_SHORT).show();
+//                //getcontext
+//            }
+//        });
     }
 }

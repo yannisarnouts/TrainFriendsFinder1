@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <EditText
             android:id="@+id/loginemail"
             android:layout_width="match_parent"
@@ -28,24 +29,32 @@
             android:inputType="textPassword"
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
-        <Button
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="Log in"
-            android:id="@+id/btnlogin"/>
+
         <TextView
             android:id="@+id/status_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""/>
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
-        <Button
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="Sign Out"
-            android:id="@+id/signOutButton"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnlogin"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Log in" />
+
+            <Button
+                android:id="@+id/signOutButton"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sign Out" />
+
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

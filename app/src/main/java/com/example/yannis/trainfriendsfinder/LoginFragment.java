@@ -43,7 +43,7 @@ public class LoginFragment extends android.app.Fragment {
     SignInButton signInButton;
     Button signOutButton;
     TextView statusTextView;
-    GoogleApiClient mGoogleApiClient;
+    //GoogleApiClient mGoogleApiClient;
     public static final String TAG = "SignInFragment";
     public static final int RC_SIGN_IN = 9001;
 
@@ -67,7 +67,7 @@ public class LoginFragment extends android.app.Fragment {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity()).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+        //mGoogleApiClient = new GoogleApiClient.Builder(getActivity()).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
         mAuth = FirebaseAuth.getInstance();
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
@@ -76,18 +76,18 @@ public class LoginFragment extends android.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialiseView();
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
+//        signInButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signIn();
+//            }
+//        });
+//        signOutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signOut();
+//            }
+//        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +98,7 @@ public class LoginFragment extends android.app.Fragment {
 
     private void initialiseView() {
         statusTextView = getView().findViewById(R.id.status_textview);
-        signInButton = getView().findViewById(R.id.sign_in_button);
+        //signInButton = getView().findViewById(R.id.sign_in_button);
         signOutButton = getView().findViewById(R.id.signOutButton);
         btnLogin = getView().findViewById(R.id.btnlogin);
         txtlogin = getView().findViewById(R.id.loginemail);
@@ -106,11 +106,11 @@ public class LoginFragment extends android.app.Fragment {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-        mainActivity.updateNav();
-    }
+//    private void signIn() {
+//        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//        startActivityForResult(signInIntent, RC_SIGN_IN);
+//        mainActivity.updateNav();
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -129,14 +129,14 @@ public class LoginFragment extends android.app.Fragment {
             //menuNaam.setText(account.getDisplayName());
         }
     }
-    private void signOut(){
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                statusTextView.setText("Signed out");
-            }
-        });
-    }
+//    private void signOut(){
+//        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+//            @Override
+//            public void onResult(@NonNull Status status) {
+//                statusTextView.setText("Signed out");
+//            }
+//        });
+//    }
     private void userLogin(){
         final String email = txtlogin.getText().toString();
         String pass = txtpassw.getText().toString();

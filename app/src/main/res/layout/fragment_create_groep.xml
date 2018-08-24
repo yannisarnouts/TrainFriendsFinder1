@@ -1,60 +1,125 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yannis.trainfriendsfinder.CreateGroepFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Maak een groep:"
-        android:textSize="24sp" />
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
-        <EditText
-            android:id="@+id/groepnaam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Groepsnaam"/>
-        <EditText
-            android:id="@+id/groepcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="code"/>
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
 
-        <Button
-            android:id="@+id/groepsubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Maak" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meld aan bij een groep:"
-        android:layout_marginTop="75dp"
-        android:textSize="24sp"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp">
-        <EditText
-            android:id="@+id/groeploginnaam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Groepsnaam"/>
-        <EditText
-            android:id="@+id/groeplogincode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="code"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/groeplogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Volg" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:src="@drawable/friendsicon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Groep aanmaken"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hier kunt u zelf een groep aanmaken met een naam en een code!" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/groepnaam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Groepsnaam"
+                        android:lineSpacingExtra="12sp"
+                        android:textColor="#FFFFFF" />
+
+                    <EditText
+                        android:id="@+id/groepcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="code" />
+
+                    <Button
+                        android:id="@+id/groepsubmit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/ic_input_add"
+                        android:text="Maak" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:src="@drawable/friendsicon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Groep volgen"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Word lid van een groep die reeds bestaat!" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/groeploginnaam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Groepsnaam" />
+
+                    <EditText
+                        android:id="@+id/groeplogincode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="code" />
+
+                    <Button
+                        android:id="@+id/groeplogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/ic_input_add"
+                        android:text="Volg" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
