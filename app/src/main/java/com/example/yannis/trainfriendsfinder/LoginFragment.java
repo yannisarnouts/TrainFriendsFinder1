@@ -40,8 +40,8 @@ import org.w3c.dom.Text;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends android.app.Fragment {
-    SignInButton signInButton;
-    Button signOutButton;
+    //SignInButton signInButton;
+    //Button signOutButton;
     TextView statusTextView;
     //GoogleApiClient mGoogleApiClient;
     public static final String TAG = "SignInFragment";
@@ -51,7 +51,7 @@ public class LoginFragment extends android.app.Fragment {
     EditText txtpassw;
     FirebaseAuth mAuth;
     Button btnLogin;
-    MainActivity mainActivity = new MainActivity();
+    FirebaseUser user;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -99,7 +99,7 @@ public class LoginFragment extends android.app.Fragment {
     private void initialiseView() {
         statusTextView = getView().findViewById(R.id.status_textview);
         //signInButton = getView().findViewById(R.id.sign_in_button);
-        signOutButton = getView().findViewById(R.id.signOutButton);
+        //signOutButton = getView().findViewById(R.id.signOutButton);
         btnLogin = getView().findViewById(R.id.btnlogin);
         txtlogin = getView().findViewById(R.id.loginemail);
         txtpassw = getView().findViewById(R.id.loginpassword);
@@ -140,12 +140,18 @@ public class LoginFragment extends android.app.Fragment {
     private void userLogin(){
         final String email = txtlogin.getText().toString();
         String pass = txtpassw.getText().toString();
-
+        final MainActivity mainActivity = new MainActivity();
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(getActivity(), "U bent ingelogd!", Toast.LENGTH_LONG).show();
+                    user = mAuth.getCurrentUser();
+                    mainActivity.updateNav();
+                    Intent restartIntent = getActivity().getPackageManager() // getContext
+                            .getLaunchIntentForPackage(getActivity().getPackageName());
+                    restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(restartIntent);
                 }else {
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }

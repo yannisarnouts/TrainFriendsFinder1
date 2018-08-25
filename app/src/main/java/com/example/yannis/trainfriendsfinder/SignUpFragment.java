@@ -1,6 +1,7 @@
 package com.example.yannis.trainfriendsfinder;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -108,6 +109,10 @@ public class SignUpFragment extends android.app.Fragment {
                             if(task.isSuccessful()){
                                 Toast.makeText(getActivity(), "Gebruiker succesvol geregistreerd" , Toast.LENGTH_LONG).show();
                                 addDisplayName();
+                                Intent restartIntent = getActivity().getPackageManager() //getContext
+                                        .getLaunchIntentForPackage(getActivity().getPackageName());
+                                restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(restartIntent);
                             }else{
                                 Toast.makeText(getActivity(), "Registreren mislukt", Toast.LENGTH_LONG).show();
                             }

@@ -9,7 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/trainicon"
+            android:layout_gravity="center"/>
         <EditText
             android:id="@+id/loginemail"
             android:layout_width="match_parent"
@@ -47,14 +51,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Log in" />
-
-            <Button
-                android:id="@+id/signOutButton"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sign Out" />
-
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/textViewRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Nog geen account? Registreer"
+        android:textAlignment="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="bottom"/>
 </FrameLayout>

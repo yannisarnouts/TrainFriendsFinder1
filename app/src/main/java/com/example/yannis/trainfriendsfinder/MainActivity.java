@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     FirebaseUser user;
     TextView menuNaam;
     ImageView imgProfiel;
+    MenuItem mijnProfiel, newGroep, meldingen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +117,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         android.app.FragmentManager fragmentManager = getFragmentManager();
         if (id == R.id.trainsButton) {
             fragment = new Trains();
-        } else if (id == R.id.nav_groep) {
+        } else if (id == R.id.nav_groep && user != null) {
             fragment = new GroepFragment();
-        } else if (id == R.id.meldingen) {
+        } else if (id == R.id.meldingen && user != null) {
             fragment = new MeldingenFragment();
         }  else if(id == R.id.login){
             fragment = new LoginFragment();
@@ -126,15 +127,21 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         } else if(id == R.id.signUp){
             fragment = new SignUpFragment();
         }
-        else if(id == R.id.profiel){
+        else if(id == R.id.profiel && user != null){
             fragment = new ProfileFragment();
         }else if(id == R.id.loguit){
             FirebaseAuth.getInstance().signOut();
             //finish();
+            Intent restartIntent = getPackageManager() //getContext
+                    .getLaunchIntentForPackage(getPackageName());
+            restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(restartIntent);
             fragment = new LoginFragment();
         }
-        else if(id == R.id.creategroup){
+        else if(id == R.id.creategroup && user != null){
             fragment = new CreateGroepFragment();
+        } else{
+            fragment = new LoginFragment();
         }
         if(fragmentManager != null){
             fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
@@ -143,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     public void updateNav(){
         if(user != null){
             menuNaam.setText(user.getEmail());
