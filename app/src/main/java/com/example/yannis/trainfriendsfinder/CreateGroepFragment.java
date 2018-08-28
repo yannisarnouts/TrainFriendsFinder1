@@ -1,6 +1,7 @@
 package com.example.yannis.trainfriendsfinder;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -88,6 +89,10 @@ Button btnSubmit, btnVolg;
                         FirebaseMessaging.getInstance().subscribeToTopic(s.getKey());
                         Toast.makeText(getActivity(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
                         //getContext()
+                        Intent restartIntent = getActivity().getPackageManager() // getContext
+                                .getLaunchIntentForPackage(getActivity().getPackageName());
+                        restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(restartIntent);
                     }
                 }
             }
@@ -108,6 +113,10 @@ Button btnSubmit, btnVolg;
             updateUser(groepId);
             FirebaseMessaging.getInstance().subscribeToTopic(groepId);
             Toast.makeText(getActivity(), "Groep aangemaakt", Toast.LENGTH_LONG).show(); //getContext
+            Intent restartIntent = getActivity().getPackageManager() // getContext
+                    .getLaunchIntentForPackage(getActivity().getPackageName());
+            restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(restartIntent);
         }else{
             Toast.makeText(getActivity(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();
         }

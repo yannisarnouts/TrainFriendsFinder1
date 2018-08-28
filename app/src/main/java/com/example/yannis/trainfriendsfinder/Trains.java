@@ -104,10 +104,10 @@ public class Trains extends android.app.Fragment  {
                     String bestemming = trein[0].substring(16);
                     String time = trein[3].substring(6);
                     try {
-                        SendNotification(bestemming, time);
+                        SendNotification(bestemming, time, i);
                 } catch (Exception e){
                         //getcontext
-                        Toast.makeText(getActivity(), "Om in te kunnen checken moet u aangemeld zijn!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Om in te kunnen checken moet u aangemeld en lid van een groep zijn!", Toast.LENGTH_LONG).show();
                 }
                 }
             });
@@ -134,17 +134,29 @@ public class Trains extends android.app.Fragment  {
         }
     }
 
-    private void SendNotification(String trein, String tijd){
+    private void SendNotification(final String trein, final String tijd, final int index){
         dbrefUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
                     groepId= dataSnapshot.child(userId).child("groepId").getValue(String.class);
+                    Toast.makeText(getActivity(), groepId, Toast.LENGTH_LONG).show();//getcontext
                     username = dataSnapshot.child(userId).child("naam").getValue(String.class);
+
+                    if(groepId != null){
+                        DatabaseReference notification = databaseReference.push();
+                        notification.child("from").setValue(userId);
+                        notification.child("to").setValue(groepId);
+                        notification.child("message").setValue(username + ":" + trein + " " + tijd);
+                        Toast.makeText(getActivity(), "Ingecheckt in trein naar: " + trein + " om " + tijd, Toast.LENGTH_LONG).show();//getcontext
+                    }else {
+                        Toast.makeText(getActivity(),"Probeer opnieuw!",Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e){
-                Toast.makeText(getContext(), "Om in te kunnen checken moet u aangemeld zijn!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Om in te kunnen checken moet u aangemeld en lid van een groep zijn!", Toast.LENGTH_LONG).show(); //getContext
             }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -152,29 +164,6 @@ public class Trains extends android.app.Fragment  {
             }
         });
 
-        if(groepId != null){
-                DatabaseReference notification = databaseReference.push();
-                notification.child("from").setValue(userId);
-                notification.child("to").setValue(groepId);
-                notification.child("message").setValue(username + ":" + trein + " " + tijd);
-        Toast.makeText(getActivity(), "Ingecheckt in trein naar: " + trein + " om " + tijd, Toast.LENGTH_LONG).show();//getcontext
-        }else {
-            Toast.makeText(getActivity(),"Probeer opnieuw!",Toast.LENGTH_SHORT).show();
-            //lv.performClick();
-            //SendNotification(trein, tijd);
-            }
+
         }
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @RequiresApi(api = Build.VERSION_CODES.M)
-//            @Override
-//            public void onSuccess(Void aVoid) {
-                //getcontext
-            //}
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getActivity(),"Notificatie niet verzonden :(",Toast.LENGTH_SHORT).show();
-//                //getcontext
-//            }
-//        });
     }

@@ -58,6 +58,7 @@ public class ProfileFragment extends android.app.Fragment {
         lvMijnRitten = getView().findViewById(R.id.lvMijnRitten);
         dbref = FirebaseDatabase.getInstance().getReference().child("Notifications");
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        txtNaam.setText(user.getEmail());
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, treinen);
         //getContext()
         lvMijnRitten.setAdapter(arrayAdapter);
@@ -68,11 +69,9 @@ public class ProfileFragment extends android.app.Fragment {
                 for (DataSnapshot s : dataSnapshot.getChildren()){
                     String trein = s.child("message").getValue(String.class);
                     String from = s.child("from").getValue(String.class);
-                    String naam = trein.split(":'")[0];
                     try {
                         if (from.equals(uid)) {
                             treinen.add(trein.replace('}', ' '));
-                            txtNaam.setText(naam);
                             arrayAdapter.notifyDataSetChanged();
                         }
                     }catch (Exception e){
