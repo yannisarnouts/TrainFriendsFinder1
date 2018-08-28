@@ -59,7 +59,7 @@ public class MeldingenFragment extends android.app.Fragment {
         uid = user.getUid();
         dbrefUser = FirebaseDatabase.getInstance().getReference().child("Users");
         final MeldingAdapter meldingAdapter = new MeldingAdapter(getActivity(), meldingen);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, meldingen);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, meldingen); //getContext
         lvMeldingen.setAdapter(meldingAdapter);
 
         dbrefUser.addValueEventListener(new ValueEventListener() {
