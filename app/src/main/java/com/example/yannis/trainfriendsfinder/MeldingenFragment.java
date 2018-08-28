@@ -80,14 +80,10 @@ public class MeldingenFragment extends android.app.Fragment {
                 for (DataSnapshot s : dataSnapshot.getChildren()) {
                     String value = s.child("to").getValue(String.class);
                     String naam = s.child("message").getValue(String.class);
-                    try{
                         if (value.equals(groepId)) {
                             meldingen.add(naam);
                             meldingAdapter.notifyDataSetChanged();
                         }
-                    }catch (NullPointerException ne){
-                        Toast.makeText(getContext(), "Maak een groep of voeg jezelf aan een groep toe!", Toast.LENGTH_LONG).show();
-                    }
                 }
             }
 

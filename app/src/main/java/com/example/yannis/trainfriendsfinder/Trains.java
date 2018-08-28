@@ -46,11 +46,6 @@ public class Trains extends android.app.Fragment  {
     String userId, groepId, username;
     FirebaseAuth mAuth;
     FirebaseUser user;
-    // TODO: Rename and change types of parameters
-    //private String mParam1;
-    //private String mParam2;
-
-
 
     public Trains() {
         // Required empty public constructor
@@ -58,21 +53,12 @@ public class Trains extends android.app.Fragment  {
 
     public static Trains newInstance(String param1, String param2) {
         Trains fragment = new Trains();
-        // Bundle args = new Bundle();
-        // args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
-        //fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //if (getArguments() != null) {
-        //    mParam1 = getArguments().getString(ARG_PARAM1);
-        //   mParam2 = getArguments().getString(ARG_PARAM2);
-        //}
     }
 
     @Override
@@ -90,15 +76,15 @@ public class Trains extends android.app.Fragment  {
         btnZoek = getView().findViewById(R.id.btnZoek);
         txtZoek = getView().findViewById(R.id.zoek);
         txttrein = getView().findViewById(R.id.tv_naam);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Notifications");
+        dbrefUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         try {
             userId = user.getUid();
         }catch (Exception e){
-
+            Toast.makeText(getActivity(), "Log in om in te checken!", Toast.LENGTH_LONG).show();
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Notifications");
-        dbrefUser = FirebaseDatabase.getInstance().getReference().child("Users");
 
         btnZoek.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -118,9 +104,7 @@ public class Trains extends android.app.Fragment  {
                     String bestemming = trein[0].substring(16);
                     String time = trein[3].substring(6);
                     try {
-                    Toast.makeText(getActivity(), "Ingecheckt in trein naar: " + bestemming + " om " + time, Toast.LENGTH_LONG).show();
-                    //getcontext
-                    SendNotification(bestemming, time);
+                        SendNotification(bestemming, time);
                 } catch (Exception e){
                         //getcontext
                         Toast.makeText(getActivity(), "Om in te kunnen checken moet u aangemeld zijn!", Toast.LENGTH_LONG).show();
@@ -130,13 +114,6 @@ public class Trains extends android.app.Fragment  {
 
         new TreinParser(this).execute();
     }
-
-//    private void checkIn() {
-//        //TODO
-//        Toast.makeText(getContext(), "There is no internet connection active.", Toast.LENGTH_LONG).show();
-//
-//        FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
-//    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void getUrl() {
@@ -162,8 +139,8 @@ public class Trains extends android.app.Fragment  {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
-                groepId= dataSnapshot.child(userId).child("groepId").getValue(String.class);
-                username = dataSnapshot.child(userId).child("naam").getValue(String.class);
+                    groepId= dataSnapshot.child(userId).child("groepId").getValue(String.class);
+                    username = dataSnapshot.child(userId).child("naam").getValue(String.class);
                 } catch (Exception e){
                 Toast.makeText(getContext(), "Om in te kunnen checken moet u aangemeld zijn!", Toast.LENGTH_LONG).show();
             }
@@ -174,15 +151,23 @@ public class Trains extends android.app.Fragment  {
 
             }
         });
-        DatabaseReference notification = databaseReference.push();
-        notification.child("message").setValue(username + ":"+trein+" "+tijd);
-        notification.child("to").setValue(groepId);
-        notification.child("from").setValue(userId);
+
+        if(groepId != null){
+                DatabaseReference notification = databaseReference.push();
+                notification.child("from").setValue(userId);
+                notification.child("to").setValue(groepId);
+                notification.child("message").setValue(username + ":" + trein + " " + tijd);
+        Toast.makeText(getActivity(), "Ingecheckt in trein naar: " + trein + " om " + tijd, Toast.LENGTH_LONG).show();//getcontext
+        }else {
+            Toast.makeText(getActivity(),"Probeer opnieuw!",Toast.LENGTH_SHORT).show();
+            //lv.performClick();
+            //SendNotification(trein, tijd);
+            }
+        }
 //                .addOnSuccessListener(new OnSuccessListener<Void>() {
 //            @RequiresApi(api = Build.VERSION_CODES.M)
 //            @Override
 //            public void onSuccess(Void aVoid) {
-                Toast.makeText(getActivity(),"Notificatie verzonden",Toast.LENGTH_SHORT).show();
                 //getcontext
             //}
 //        }).addOnFailureListener(new OnFailureListener() {
@@ -193,4 +178,3 @@ public class Trains extends android.app.Fragment  {
 //            }
 //        });
     }
-}

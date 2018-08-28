@@ -96,16 +96,7 @@ Button btnSubmit, btnVolg;
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
-//        String groepsnaam = txtgroepslogin.getText().toString();
-//        if(!TextUtils.isEmpty(groepsnaam)){
-//            String groepId = dbref.push().getKey();
-//            updateUser(groepId);
-//            Toast.makeText(getContext(), "U bent toegevoegd aan de groep", Toast.LENGTH_LONG).show();
-//        }else{
-//            Toast.makeText(getContext(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();
-//        }
-    }
+        });}
 
     private void createGroep(){
         String groepsnaam = txtgroepsnaam.getText().toString();
@@ -116,9 +107,9 @@ Button btnSubmit, btnVolg;
             dbref.child(groepId).setValue(groep);
             updateUser(groepId);
             FirebaseMessaging.getInstance().subscribeToTopic(groepId);
-            Toast.makeText(getContext(), "Groep aangemaakt", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Groep aangemaakt", Toast.LENGTH_LONG).show(); //getContext
         }else{
-            Toast.makeText(getContext(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "naam en code invullen aub!", Toast.LENGTH_LONG).show();
         }
     }
 

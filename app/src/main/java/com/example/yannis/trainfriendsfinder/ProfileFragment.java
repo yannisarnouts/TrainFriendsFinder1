@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class ProfileFragment extends android.app.Fragment {
     FirebaseAuth mAuth;
     FirebaseUser user;
-    TextView txtNaam, txtmail;
+    TextView txtNaam;
     DatabaseReference dbref;
     ListView lvMijnRitten;
     String uid;
@@ -57,7 +57,6 @@ public class ProfileFragment extends android.app.Fragment {
         txtNaam = getView().findViewById(R.id.txtNaam);
         lvMijnRitten = getView().findViewById(R.id.lvMijnRitten);
         dbref = FirebaseDatabase.getInstance().getReference().child("Notifications");
-        txtNaam.setText(user.getEmail());
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, treinen);
         //getContext()
@@ -69,13 +68,15 @@ public class ProfileFragment extends android.app.Fragment {
                 for (DataSnapshot s : dataSnapshot.getChildren()){
                     String trein = s.child("message").getValue(String.class);
                     String from = s.child("from").getValue(String.class);
+                    String naam = trein.split(":'")[0];
                     try {
                         if (from.equals(uid)) {
                             treinen.add(trein.replace('}', ' '));
+                            txtNaam.setText(naam);
                             arrayAdapter.notifyDataSetChanged();
                         }
                     }catch (Exception e){
-                        Toast.makeText(getContext(),"ERROR",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"ERROR",Toast.LENGTH_SHORT).show(); //getContext
                     }
                 }
             }

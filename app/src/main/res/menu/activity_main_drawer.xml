@@ -37,12 +37,10 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
                 android:title="Delen" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Contacteer ons" />
+                android:title="Over ons" />
         </menu>
     </item>
 

@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.yannis.trainfriendsfinder.adapter.GroepAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -57,9 +58,10 @@ public class GroepFragment extends android.app.Fragment {
         user = mAuth.getCurrentUser();
         uid = user.getUid();
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, usernames);
+        //final ArrayAdapter<String> groepAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, usernames);
+        final GroepAdapter groepAdapter = new GroepAdapter(getActivity(), usernames);
         //getContext
-        lvGroep.setAdapter(arrayAdapter);
+        lvGroep.setAdapter(groepAdapter);
 
     dbref.addValueEventListener(new ValueEventListener() {
         @Override
@@ -69,8 +71,8 @@ public class GroepFragment extends android.app.Fragment {
                 String naam = s.child("naam").getValue(String.class);
                 try{
                     if (value.equals(dataSnapshot.child(uid).child("groepId").getValue(String.class))) {
-                        usernames.add(naam);
-                        arrayAdapter.notifyDataSetChanged();
+                        usernames.add(naam.toUpperCase());
+                        groepAdapter.notifyDataSetChanged();
                     }
                 }catch (NullPointerException ne){
                     Toast.makeText(getActivity(), "Maak een groep of voeg jezelf aan een groep toe!", Toast.LENGTH_LONG).show();

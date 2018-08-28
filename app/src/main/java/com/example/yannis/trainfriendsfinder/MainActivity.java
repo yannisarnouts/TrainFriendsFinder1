@@ -1,12 +1,14 @@
 package com.example.yannis.trainfriendsfinder;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -137,10 +139,24 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(restartIntent);
             fragment = new LoginFragment();
+        }else if(id == R.id.nav_send){
+            Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            fragment = new Trains();
         }
         else if(id == R.id.creategroup && user != null){
             fragment = new CreateGroepFragment();
-        } else{
+        }else if(id == R.id.nav_share){
+            String textToShare = "Download onze app TrainFriends (http://www.google.com) voor meer info." +"\n" + "Of bezoek onze website: www.trainfriends.be";
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/html");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "TrainFriends");
+            intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(textToShare));
+            startActivity(intent);
+            fragment = new Trains();
+        }
+        else{
             fragment = new LoginFragment();
         }
         if(fragmentManager != null){
