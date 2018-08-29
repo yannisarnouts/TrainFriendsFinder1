@@ -38,9 +38,9 @@
             <item
                 android:id="@+id/nav_share"
                 android:title="Delen" />
-            <item
+            <!--<item
                 android:id="@+id/nav_send"
-                android:title="Over ons" />
+                android:title="Over ons" />-->
         </menu>
     </item>
 

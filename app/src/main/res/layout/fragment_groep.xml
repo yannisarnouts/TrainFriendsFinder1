@@ -2,17 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.yannis.trainfriendsfinder.GroepFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VRIENDENLIJST"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp" />
-    <ListView
-        android:id="@+id/groepList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/groepList"
+            android:layout_width="match_parent"
+            android:layout_height="450dp" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewGroep"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            ads:adUnitId="ca-app-pub-3378745573406904/5068173590"
+            ads:adSize="BANNER"/>
+
+    </LinearLayout>
 </FrameLayout>

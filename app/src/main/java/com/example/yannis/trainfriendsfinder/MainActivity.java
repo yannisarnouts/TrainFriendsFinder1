@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MobileAds.initialize(this, "ca-app-pub-3378745573406904~6764398647");
 
         android.app.Fragment fragment = null;
         android.app.FragmentManager fragmentManager = getFragmentManager();
@@ -139,12 +143,13 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(restartIntent);
             fragment = new LoginFragment();
-        }else if(id == R.id.nav_send){
-            Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(intent);
-            fragment = new Trains();
         }
+//        else if(id == R.id.nav_send){
+//            Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+//            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//            startActivity(intent);
+//            fragment = new Trains();
+//        }
         else if(id == R.id.creategroup && user != null){
             fragment = new CreateGroepFragment();
         }else if(id == R.id.nav_share){

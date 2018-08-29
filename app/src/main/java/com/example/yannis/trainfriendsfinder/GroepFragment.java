@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.yannis.trainfriendsfinder.adapter.GroepAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -37,6 +39,7 @@ public class GroepFragment extends android.app.Fragment {
     FirebaseAuth mAuth;
     FirebaseUser user;
     String uid;
+    private AdView mAdView;
     public GroepFragment() {
         // Required empty public constructor
     }
@@ -57,7 +60,9 @@ public class GroepFragment extends android.app.Fragment {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         uid = user.getUid();
-
+        mAdView = getView().findViewById(R.id.adViewGroep);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         //final ArrayAdapter<String> groepAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, usernames);
         final GroepAdapter groepAdapter = new GroepAdapter(getActivity(), usernames);
         //getContext

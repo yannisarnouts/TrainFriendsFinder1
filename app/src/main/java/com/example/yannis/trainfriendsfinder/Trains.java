@@ -140,7 +140,6 @@ public class Trains extends android.app.Fragment  {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
                     groepId= dataSnapshot.child(userId).child("groepId").getValue(String.class);
-                    Toast.makeText(getActivity(), groepId, Toast.LENGTH_LONG).show();//getcontext
                     username = dataSnapshot.child(userId).child("naam").getValue(String.class);
 
                     if(groepId != null){
