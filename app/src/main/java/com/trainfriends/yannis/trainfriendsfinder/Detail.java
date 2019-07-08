@@ -1,4 +1,4 @@
-package com.example.yannis.trainfriendsfinder;
+package com.trainfriends.yannis.trainfriendsfinder;
 
 
 import android.os.Bundle;

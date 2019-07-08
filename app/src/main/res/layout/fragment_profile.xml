@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yannis.trainfriendsfinder.ProfileFragment">
+    tools:context="com.trainfriends.yannis.trainfriendsfinder.ProfileFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -55,7 +55,8 @@
             app:layout_constraintEnd_toStartOf="@+id/txtNaam"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/lvMijnRitten"
-            app:layout_constraintTop_toBottomOf="@+id/txtNaam" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNaam"
+            android:layout_marginRight="8dp" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

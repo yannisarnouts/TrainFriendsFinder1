@@ -1,18 +1,12 @@
-package com.example.yannis.trainfriendsfinder.parser;
+package com.trainfriends.yannis.trainfriendsfinder.parser;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.yannis.trainfriendsfinder.MainActivity;
-import com.example.yannis.trainfriendsfinder.R;
-import com.example.yannis.trainfriendsfinder.Trains;
-import com.example.yannis.trainfriendsfinder.model.Trein;
+import com.trainfriends.yannis.trainfriendsfinder.Trains;
+import com.trainfriends.yannis.trainfriendsfinder.model.Trein;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;

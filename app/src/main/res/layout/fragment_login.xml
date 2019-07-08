@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yannis.trainfriendsfinder.LoginFragment">
+    tools:context="com.trainfriends.yannis.trainfriendsfinder.LoginFragment">
 
 
     <LinearLayout
@@ -34,11 +34,13 @@
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
 
-        <TextView
-            android:id="@+id/status_textview"
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/fblogin_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.yannis.trainfriendsfinder.model;
+package com.trainfriends.yannis.trainfriendsfinder.model;
 
 /**
  * Created by yannis on 17/07/2018.

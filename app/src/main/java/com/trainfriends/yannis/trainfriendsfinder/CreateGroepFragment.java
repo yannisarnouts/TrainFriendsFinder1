@@ -1,4 +1,4 @@
-package com.example.yannis.trainfriendsfinder;
+package com.trainfriends.yannis.trainfriendsfinder;
 
 
 import android.content.Intent;
@@ -14,8 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.yannis.trainfriendsfinder.model.Groep;
-import com.example.yannis.trainfriendsfinder.model.User;
+import com.trainfriends.yannis.trainfriendsfinder.model.Groep;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,9 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
-
-import java.util.ArrayList;
 
 
 /**

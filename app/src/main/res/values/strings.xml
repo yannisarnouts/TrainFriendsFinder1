@@ -9,4 +9,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <!-- facebook -->
+    <string name="facebook_app_id">432328130955222</string>
+    <string name="fb_login_protocol_scheme">fb432328130955222</string>
 </resources>

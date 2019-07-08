@@ -1,16 +1,14 @@
-package com.example.yannis.trainfriendsfinder.adapter;
+package com.trainfriends.yannis.trainfriendsfinder.adapter;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.yannis.trainfriendsfinder.R;
-import com.example.yannis.trainfriendsfinder.model.Trein;
+import com.trainfriends.yannis.trainfriendsfinder.R;
+import com.trainfriends.yannis.trainfriendsfinder.model.Trein;
 
 import java.util.ArrayList;
 

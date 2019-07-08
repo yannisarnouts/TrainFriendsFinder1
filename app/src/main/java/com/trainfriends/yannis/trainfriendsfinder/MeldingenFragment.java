@@ -1,4 +1,4 @@
-package com.example.yannis.trainfriendsfinder;
+package com.trainfriends.yannis.trainfriendsfinder;
 
 
 import android.os.Bundle;
@@ -10,9 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.yannis.trainfriendsfinder.adapter.MeldingAdapter;
+import com.trainfriends.yannis.trainfriendsfinder.adapter.MeldingAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

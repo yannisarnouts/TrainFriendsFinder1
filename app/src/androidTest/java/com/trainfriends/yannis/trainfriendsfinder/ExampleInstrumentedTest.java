@@ -1,4 +1,4 @@
-package com.example.yannis.trainfriendsfinder;
+package com.trainfriends.yannis.trainfriendsfinder;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

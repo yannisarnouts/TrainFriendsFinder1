@@ -1,4 +1,4 @@
-package com.example.yannis.trainfriendsfinder.adapter;
+package com.trainfriends.yannis.trainfriendsfinder.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.yannis.trainfriendsfinder.model.Melding;
-import com.example.yannis.trainfriendsfinder.R;
+import com.trainfriends.yannis.trainfriendsfinder.R;
 
 import java.util.ArrayList;
 

@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.0.0'
     implementation 'com.google.firebase:firebase-ads:15.0.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
+    implementation 'com.facebook.android:facebook-login:[5,6)'
     compile 'com.jjoe64:graphview:4.2.1'
     compile 'com.google.firebase:firebase-core:16.0.0'
     testImplementation 'junit:junit:4.12'
